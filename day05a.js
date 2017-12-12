@@ -1,5 +1,5 @@
 var fs = require('fs');
-var input = fs.readFileSync('day5_input.txt', 'utf8');
+var input = fs.readFileSync('day05_input.txt', 'utf8');
 
 var instructions = input.trim().split('\n').map(function(line) { return parseInt(line); });
 

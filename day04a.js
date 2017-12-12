@@ -1,5 +1,5 @@
 var fs = require('fs');
-var input = fs.readFileSync('day4_input.txt', 'utf8');
+var input = fs.readFileSync('day04_input.txt', 'utf8');
 
 var phrases = input.split('\n');
 var validPhrases = 0;

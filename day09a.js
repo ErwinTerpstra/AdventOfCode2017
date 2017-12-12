@@ -1,14 +1,13 @@
 var fs = require('fs');
 
-var input = fs.readFileSync('day9_input.txt', 'utf8').trim();
+var input = fs.readFileSync('day09_input.txt', 'utf8').trim();
 
 var rootGroup = null;
 var currentGroup = null;
 var inGarbageGroup = false;
-var escaped = false;
+var escaped = true;
 
 var totalScore = 0;
-var garbageCharacters = 0;
 
 for (var characterIdx = 0; characterIdx < input.length; ++characterIdx)
 {
@@ -26,10 +25,6 @@ for (var characterIdx = 0; characterIdx < input.length; ++characterIdx)
 
 				case '>':
 					inGarbageGroup = false;
-					break;
-
-				default:
-					++garbageCharacters;
 					break;
 			}
 		}
@@ -78,4 +73,3 @@ for (var characterIdx = 0; characterIdx < input.length; ++characterIdx)
 }
 
 console.log(totalScore);
-console.log(garbageCharacters);

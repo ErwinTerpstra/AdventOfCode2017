@@ -1,7 +1,7 @@
 var fs = require('fs');
 var sscanf = require('scanf').sscanf;
 
-var input = fs.readFileSync('day7_input.txt', 'utf8');
+var input = fs.readFileSync('day07_input.txt', 'utf8');
 
 function parseNode(line)
 {
