@@ -10,6 +10,8 @@ var CPU = function(id, instructions, output)
 	this.queue = [ ];
 	this.blockRegister = null
 
+	this.opcodeCounts = { };
+
 	this.opcodes = 
 	{
 		snd: function(src)
@@ -25,6 +27,11 @@ var CPU = function(id, instructions, output)
 		add: function(dst, src)
 		{
 			dst.value += src.value;
+		},
+
+		sub: function(dst, src)
+		{
+			dst.value -= src.value;
 		},
 
 		mul: function(dst, src)
@@ -45,12 +52,16 @@ var CPU = function(id, instructions, output)
 				dst.value = this.queue.shift();
 		},
 
+		jnz: function(condition, offset)
+		{
+			if (condition.value != 0)
+				this.pc += offset.value - 1;
+		},
+
 		jgz: function(condition, offset)
 		{
 			if (condition.value > 0)
-				this.pc += offset.value;
-			else
-				++this.pc;
+				this.pc += offset.value - 1;
 		}
 	};
 
@@ -101,9 +112,12 @@ var CPU = function(id, instructions, output)
 		//console.log(this.pc, line, instruction.opcode, operands);
 
 		this.opcodes[instruction.opcode].apply(this, operands);
+		++this.pc;
 
-		if (instruction.opcode != 'jgz')
-			++this.pc;
+		if (!this.opcodeCounts.hasOwnProperty(instruction.opcode))
+			this.opcodeCounts[instruction.opcode] = 1;
+		else
+			++this.opcodeCounts[instruction.opcode];
 	};
 
 	this.isTerminated = function()
